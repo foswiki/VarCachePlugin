@@ -25,10 +25,10 @@ use vars qw(
         $debug $paramMsg
     );
 
-# This should always be $Rev: 8154 $ so that TWiki can determine the checked-in
+# This should always be $Rev$ so that TWiki can determine the checked-in
 # status of the plugin. It is used by the build automation tools, so
 # you should leave it alone.
-$VERSION = '$Rev: 8154 $';
+$VERSION = '$Rev$';
 
 # This is a free-form string you can use to "name" your own plugin version.
 # It is *not* used by the build automation tools, but is reported as part
