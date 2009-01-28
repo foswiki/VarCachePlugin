@@ -17,7 +17,7 @@
 # As per the GPL, removal of this notice is prohibited.
 
 # =========================
-package TWiki::Plugins::VarCachePlugin;
+package Foswiki::Plugins::VarCachePlugin;
 
 # =========================
 use vars qw(
@@ -43,16 +43,16 @@ sub initPlugin
     ( $topic, $web, $user, $installWeb ) = @_;
 
     # check for Plugins.pm versions
-    if( $TWiki::Plugins::VERSION < 1.024 ) {
-        TWiki::Func::writeWarning( "Version mismatch between $pluginName and Plugins.pm" );
+    if( $Foswiki::Plugins::VERSION < 1.024 ) {
+        Foswiki::Func::writeWarning( "Version mismatch between $pluginName and Plugins.pm" );
         return 0;
     }
 
     # Get plugin debug flag
-    $debug = TWiki::Func::getPreferencesFlag( "\U$pluginName\E_DEBUG" );
+    $debug = Foswiki::Func::getPreferencesFlag( "\U$pluginName\E_DEBUG" );
 
     # Plugin correctly initialized
-    TWiki::Func::writeDebug( "- TWiki::Plugins::${pluginName}::initPlugin( $web.$topic ) is OK" ) if $debug;
+    Foswiki::Func::writeDebug( "- Foswiki::Plugins::${pluginName}::initPlugin( $web.$topic ) is OK" ) if $debug;
     return 1;
 }
 
@@ -61,7 +61,7 @@ sub beforeCommonTagsHandler
 {
 ### my ( $text, $topic, $web ) = @_;   # do not uncomment, use $_[0], $_[1]... instead
 
-    TWiki::Func::writeDebug( "- ${pluginName}::beforeCommonTagsHandler( $_[2].$_[1] )" ) if $debug;
+    Foswiki::Func::writeDebug( "- ${pluginName}::beforeCommonTagsHandler( $_[2].$_[1] )" ) if $debug;
 
     return unless( $_[0] =~ /%VARCACHE/ );
 
@@ -75,7 +75,7 @@ sub afterCommonTagsHandler
 {
 ### my ( $text, $topic, $web ) = @_;   # do not uncomment, use $_[0], $_[1]... instead
 
-    TWiki::Func::writeDebug( "- ${pluginName}::afterCommonTagsHandler( $_[2].$_[1] )" ) if $debug;
+    Foswiki::Func::writeDebug( "- ${pluginName}::afterCommonTagsHandler( $_[2].$_[1] )" ) if $debug;
 
     return unless( $_[0] =~ /%--VARCACHE\:/ );
 
@@ -86,13 +86,13 @@ sub afterCommonTagsHandler
 
         if( $save ) {
             # update cache
-            TWiki::Func::saveFile( $cacheFilename, $_[0] );
+            Foswiki::Func::saveFile( $cacheFilename, $_[0] );
             $msg = _formatMsg( $_[2], $_[1] );
             $_[0] =~ s/%--VARCACHE\:.*?--%/$msg/go;
 
         } else {
             # read cache
-            my $text = TWiki::Func::readFile( $cacheFilename );
+            my $text = Foswiki::Func::readFile( $cacheFilename );
             $msg = _formatMsg( $_[2], $_[1] );
             $msg =~ s/\$age/_formatAge($age)/geo;
             $text =~ s/%--VARCACHE.*?--%/$msg/go;
@@ -111,7 +111,7 @@ sub _formatMsg
     $msg =~ s|\$link|%SCRIPTURL%/view%SCRIPTSUFFIX%/%WEB%/%TOPIC%?varcache=refresh|go;
     $msg =~ s|%ATTACHURL%|%PUBURL%/$installWeb/$pluginName|go;
     $msg =~ s|%ATTACHURLPATH%|%PUBURLPATH%/$installWeb/$pluginName|go;
-    $msg = TWiki::Func::expandCommonVariables( $msg, $theTopic, $theWeb );
+    $msg = Foswiki::Func::expandCommonVariables( $msg, $theTopic, $theWeb );
     return $msg;
 }
 
@@ -140,7 +140,7 @@ sub _handleVarCache
 {
     my ( $theWeb, $theTopic, $theArgs ) = @_;
 
-    my $query = TWiki::Func::getCgiQuery();
+    my $query = Foswiki::Func::getCgiQuery();
     my $action = "check";
     if( $query ) {
         my $tmp = $query->param( 'varcache' ) || "";
@@ -157,16 +157,16 @@ sub _handleVarCache
             my $now = time();
             my $cacheTime = (stat $filename)[9] || 10000000000;
             # CODE_SMELL: Assume file system for topics
-            $filename = TWiki::Func::getDataDir() . "/$theWeb/$theTopic.txt";
+            $filename = Foswiki::Func::getDataDir() . "/$theWeb/$theTopic.txt";
             my $topicTime = (stat $filename)[9] || 10000000000;
-            my $refresh = TWiki::Func::extractNameValuePair( $theArgs, "refresh" )
-                       || TWiki::Func::getPreferencesValue( "\U$pluginName\E_REFRESH" ) || 24;
+            my $refresh = Foswiki::Func::extractNameValuePair( $theArgs, "refresh" )
+                       || Foswiki::Func::getPreferencesValue( "\U$pluginName\E_REFRESH" ) || 24;
             $refresh *= 3600;
             if( ( ( $refresh == 0 ) || ( $cacheTime >= $now - $refresh ) )
              && ( $cacheTime >= $topicTime ) ) {
                 # add marker for afterCommonTagsHandler to read cached file
-                $paramMsg = TWiki::Func::extractNameValuePair( $theArgs, "cachemsg" )
-                         || TWiki::Func::getPreferencesValue( "\U$pluginName\E_CACHEMSG" )
+                $paramMsg = Foswiki::Func::extractNameValuePair( $theArgs, "cachemsg" )
+                         || Foswiki::Func::getPreferencesValue( "\U$pluginName\E_CACHEMSG" )
                          || 'This topic was cached $age ago ([[$link][refresh]])';
                 $cacheTime = sprintf( "%1.6f", ( $now - $cacheTime ) / 3600 );
                 return "%--VARCACHE\:read:$cacheTime--%";
@@ -177,8 +177,8 @@ sub _handleVarCache
 
     if( $action eq "refresh" ) {
         # add marker for afterCommonTagsHandler to refresh cache file
-        $paramMsg = TWiki::Func::extractNameValuePair( $theArgs, "updatemsg" )
-                 || TWiki::Func::getPreferencesValue( "\U$pluginName\E_UPDATEMSG" )
+        $paramMsg = Foswiki::Func::extractNameValuePair( $theArgs, "updatemsg" )
+                 || Foswiki::Func::getPreferencesValue( "\U$pluginName\E_UPDATEMSG" )
                  || 'This topic is now cached ([[$link][refresh]])';
         return "%--VARCACHE\:save--%";
     }
@@ -193,7 +193,7 @@ sub _cacheFileName
     my ( $web, $topic, $mkDir ) = @_;
 
     # Create web directory "pub/$web" if needed
-    my $dir = TWiki::Func::getPubDir() . "/$web";
+    my $dir = Foswiki::Func::getPubDir() . "/$web";
     if( ( $mkDir ) && ( ! -e "$dir" ) ) {
         umask( 002 );
         mkdir( $dir, 0775 );
