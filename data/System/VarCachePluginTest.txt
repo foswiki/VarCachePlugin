@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="PeterThoeny" date="1089948386" format="1.0" version="1.1"}%
+%META:TOPICINFO{author="ProjectContributor" date="1089948386" format="1.0" version="1.1"}%
 %META:TOPICPARENT{name="VarCachePlugin"}%
 ---+ <nop>VarCachePlugin Test
 
@@ -11,6 +11,3 @@ Here is the output of the =%<nop>VARCACHE{ refresh="0.1" }%= variable:
 Here is the nested search:
 
 %SEARCH{ "culture" format="	* $topic is referenced by:$n		* $percntSEARCH{ \"$topic\" format=\"	$dollartopic\" nosearch=\"on\" nototal=\"on\" }$nop%" nosearch="on" nototal="on" }%
-
--- TWiki:Main.PeterThoeny - 15 Jul 2004
-

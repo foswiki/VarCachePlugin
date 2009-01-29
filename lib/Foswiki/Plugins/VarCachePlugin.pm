@@ -1,8 +1,9 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 #
 # Copyright (C) 2004-2006 Peter Thoeny, peter@thoeny.org
+# Copyright (C) 2009 Foswiki Contributors
 #
-# For licensing info read LICENSE file in the TWiki root.
+# For licensing info read LICENSE file in the Foswiki root.
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
@@ -25,7 +26,7 @@ use vars qw(
         $debug $paramMsg
     );
 
-# This should always be $Rev$ so that TWiki can determine the checked-in
+# This should always be $Rev$ so that Foswiki can determine the checked-in
 # status of the plugin. It is used by the build automation tools, so
 # you should leave it alone.
 $VERSION = '$Rev$';
@@ -33,7 +34,7 @@ $VERSION = '$Rev$';
 # This is a free-form string you can use to "name" your own plugin version.
 # It is *not* used by the build automation tools, but is reported as part
 # of the version number in PLUGINDESCRIPTIONS.
-$RELEASE = 'Dakar';
+$RELEASE = '29 Jan 2009';
 
 $pluginName = 'VarCachePlugin';  # Name of this Plugin
 
@@ -49,7 +50,7 @@ sub initPlugin
     }
 
     # Get plugin debug flag
-    $debug = Foswiki::Func::getPreferencesFlag( "\U$pluginName\E_DEBUG" );
+    $debug = Foswiki::Func::getPreferencesFlag( "VARCACHEPLUGIN_DEBUG" );
 
     # Plugin correctly initialized
     Foswiki::Func::writeDebug( "- Foswiki::Plugins::${pluginName}::initPlugin( $web.$topic ) is OK" ) if $debug;
@@ -160,13 +161,13 @@ sub _handleVarCache
             $filename = Foswiki::Func::getDataDir() . "/$theWeb/$theTopic.txt";
             my $topicTime = (stat $filename)[9] || 10000000000;
             my $refresh = Foswiki::Func::extractNameValuePair( $theArgs, "refresh" )
-                       || Foswiki::Func::getPreferencesValue( "\U$pluginName\E_REFRESH" ) || 24;
+                       || Foswiki::Func::getPreferencesValue( "VARCACHEPLUGIN_REFRESH" ) || 24;
             $refresh *= 3600;
             if( ( ( $refresh == 0 ) || ( $cacheTime >= $now - $refresh ) )
              && ( $cacheTime >= $topicTime ) ) {
                 # add marker for afterCommonTagsHandler to read cached file
                 $paramMsg = Foswiki::Func::extractNameValuePair( $theArgs, "cachemsg" )
-                         || Foswiki::Func::getPreferencesValue( "\U$pluginName\E_CACHEMSG" )
+                         || Foswiki::Func::getPreferencesValue( "VARCACHEPLUGIN_CACHEMSG" )
                          || 'This topic was cached $age ago ([[$link][refresh]])';
                 $cacheTime = sprintf( "%1.6f", ( $now - $cacheTime ) / 3600 );
                 return "%--VARCACHE\:read:$cacheTime--%";
@@ -178,7 +179,7 @@ sub _handleVarCache
     if( $action eq "refresh" ) {
         # add marker for afterCommonTagsHandler to refresh cache file
         $paramMsg = Foswiki::Func::extractNameValuePair( $theArgs, "updatemsg" )
-                 || Foswiki::Func::getPreferencesValue( "\U$pluginName\E_UPDATEMSG" )
+                 || Foswiki::Func::getPreferencesValue( "VARCACHEPLUGIN_UPDATEMSG" )
                  || 'This topic is now cached ([[$link][refresh]])';
         return "%--VARCACHE\:save--%";
     }

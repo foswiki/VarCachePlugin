@@ -1,13 +1,13 @@
 %META:TOPICINFO{author="ProjectContributor" date="1141669952" format="1.0" version="1.4"}%
 ---+ Variable Cache Plugin 
 
-This Plugin caches TWiki variables in selected topics for faster page rendering.
+This Plugin caches Foswiki macros in selected topics for faster page rendering.
 
-Most topics in a typical TWiki installation are rendered within a small deviation in terms of speed. Exceptions are topics that contain a lot of dynamic content. This is mainly caused by CPU or I/O intensive [[%SYSTEMWEB%.Macros][Macros]], such as =%<nop>SEARCH{}%= and =%<nop>INCLUDE{}%=. 
+Most topics in a typical Foswiki installation are rendered within a small deviation in terms of speed. Exceptions are topics that contain a lot of dynamic content. This is mainly caused by CPU or I/O intensive [[%SYSTEMWEB%.Macros][Macros]], such as =%<nop>SEARCH{}%= and =%<nop>INCLUDE{}%=. 
 
 This Plugin caches all =%<nop>VARIABLES%= located in a topic so that the topic can get rendered as quickly as one without variables. An outdated cache gets refreshed when a user is looking at a topic; in which case it will take longer to render the page. Time-based refresh can also be disabled in favor of an on-demand cache update.
 
-The rendering of TWiki markup to HTML is not cached. That is, user specific HTML rendering based on skin settings is not affected by the caching.
+The rendering of Foswiki topic markup to HTML is not cached. That is, user specific HTML rendering based on skin settings is not affected by the caching.
 
 ---++ Syntax Rules and Cache Update Rules
 
@@ -37,7 +37,7 @@ The rendering of TWiki markup to HTML is not cached. That is, user specific HTML
 Plugin settings are stored as preferences variables. To reference a plugin setting write ==%<nop>&lt;plugin&gt;_&lt;setting&gt;%==, i.e. ==%<nop>VARCACHEPLUGIN_SHORTDESCRIPTION%==
 
 	* One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic:
-		* Set SHORTDESCRIPTION = Cache TWiki variables in selected topics for faster page rendering
+		* Set SHORTDESCRIPTION = Cache Foswiki macros in selected topics for faster page rendering
 
 	* Debug plugin: (See output in =data/debug.txt=)
 		* Set DEBUG = 0
@@ -54,10 +54,10 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 ---++ Plugin Installation Instructions
 
-__Note:__ You do not need to install anything on the browser to use this plugin. The following instructions are for the administrator who installs the Plugin on the TWiki server. 
+__Note:__ You do not need to install anything on the browser to use this plugin. The following instructions are for the administrator who installs the Plugin on the Foswiki server. 
 
 	* Download the ZIP file from the Plugin web (see below)
-	* Unzip ==%TOPIC%.zip== in your twiki installation directory. Content:
+	* Unzip ==%TOPIC%.zip== in your Foswiki installation directory. Content:
 	  | *File:* | *Description:* |
 	  | ==data/System/%TOPIC%.txt== | Plugin topic |
 	  | ==data/System/%TOPIC%.txt,v== | Plugin topic repository |
@@ -72,25 +72,22 @@ __Note:__ You do not need to install anything on the browser to use this plugin.
 
 ---++ Plugin Info
 
-|  Plugin Author: | TWiki:Main/PeterThoeny |
-|  Copyright: | &copy; 2004-2007, [[http://www.twiki.net/][TWIKI.NET]] |
+|  Plugin Author: | Original: TWiki:Main/PeterThoeny, In Foswiki context Foswiki:Main.KennethLavrsen |
+|  Copyright: | &copy; 2004-2007, TWIKI.NET, &copy; Foswiki Contributors |
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
-|  Plugin Version: | 06 Jan 2006 |
+|  Plugin Version: | 29 Jan 2009 |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  29 Jan 2009: | Foswiki version |
 |  06 Jan 2006: | Small fix for TWiki 4.0 |
 |  16 Jul 2004: | Doc improvements (no code change) |
 |  15 Jul 2004: | Initial version |
-|  TWiki Dependency: | $TWiki::Plugins::VERSION 1.024 (15 Jul 2004) |
+|  Foswiki Dependency: | $Foswiki::Plugins::VERSION 1.024 (15 Jul 2004) |
 |  CPAN Dependencies: | none |
 |  Other Dependencies: | none |
-|  Perl Version: | 5.005 |
-|  Foswiki:Extensions/Benchmark: | %SYSTEMWEB%.GoodStyle 99%, %SYSTEMWEB%.FormattedSearch 99%, %TOPIC%Test 208% |
+|  Perl Version: | 5.008 |
 |  Plugin Home: | http://foswiki.org/Extensions/%TOPIC% |
 |  Feedback: | http://foswiki.org/Extensions/%TOPIC%Dev |
-|  Appraisal: | http://foswiki.org/Extensions/%TOPIC%Appraisal |
 
 __Related Topics:__ [[%SYSTEMWEB%.Plugins][Plugins]], %SYSTEMWEB%.DeveloperDocumentationCategory, %SYSTEMWEB%.AdminDocumentationCategory, %SYSTEMWEB%.DefaultPreferences, %USERSWEB%.SitePreferences
 
--- TWiki:Main/PeterThoeny - 06 Jan 2006
-
-%META:FILEATTACHMENT{name="cachetopic.gif" attr="h" comment="Cache icon 16x16 pixel" date="1089949592" path="cachetopic.gif" size="935" user="PeterThoeny" version="1.1"}%
+%META:FILEATTACHMENT{name="cachetopic.gif" attr="h" comment="Cache icon 16x16 pixel" date="1089949592" path="cachetopic.gif" size="935" user="ProjectContributor" version="1.1"}%
