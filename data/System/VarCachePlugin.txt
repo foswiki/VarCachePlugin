@@ -47,9 +47,9 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 	* Cache help messages. Use =$age= to indicate age of cache, =$link= to indicate the refresh URL
 		* Set CACHEMSG = This topic was cached $age ago ([<nop>[$link][refresh]])
-		* Set UDATEMSG = This topic is now cached ([<nop>[$link][refresh]])
+		* Set UPDATEMSG = This topic is now cached ([<nop>[$link][refresh]])
 		* #Set CACHEMSG = <a href="$link"><img src="%ATTACHURLPATH%/cachetopic.gif" alt="This topic was cached $age ago. Click icon to refresh." width="16" height="16" border="0" /></a>
-		* #Set UDATEMSG = <a href="$link"><img src="%ATTACHURLPATH%/cachetopic.gif" alt="This topic is now cached. Click icon to refresh." width="16" height="16" border="0" /></a>
+		* #Set UPDATEMSG = <a href="$link"><img src="%ATTACHURLPATH%/cachetopic.gif" alt="This topic is now cached. Click icon to refresh." width="16" height="16" border="0" /></a>
 
 
 ---++ Plugin Installation Instructions
