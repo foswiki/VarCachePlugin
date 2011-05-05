@@ -195,19 +195,8 @@ sub _cacheFileName
 {
     my ( $web, $topic, $mkDir ) = @_;
 
-    # Create web directory "pub/$web" if needed
-    my $dir = Foswiki::Func::getPubDir() . "/$web";
-    if( ( $mkDir ) && ( ! -e "$dir" ) ) {
-        umask( 002 );
-        mkdir( $dir, 0775 );
-    }
-    # Create topic directory "pub/$web/$topic" if needed
-    $dir .= "/$topic";
-    if( ( $mkDir ) && ( ! -e "$dir" ) ) {
-        umask( 002 );
-        mkdir( $dir, 0775 );
-    }
-    return "$dir/_${pluginName}_cache.txt";
+    my $dir = Foswiki::Func::getWorkArea( $pluginName );
+    return "$dir/$web\_$topic.txt";
 }
 
 # =========================
