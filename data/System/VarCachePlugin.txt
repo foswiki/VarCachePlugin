@@ -34,57 +34,41 @@ The rendering of Foswiki topic markup to HTML is not cached. That is, user speci
 
 ---++ Plugin Settings
 
-Plugin settings are stored as preferences variables. To reference a plugin setting write ==%<nop>&lt;plugin&gt;_&lt;setting&gt;%==, i.e. ==%<nop>VARCACHEPLUGIN_SHORTDESCRIPTION%==
+Plugin settings are stored as preferences values. You can override the defaults for these preferences in %LOCALSITEPREFS%, the <nolink>%WEBPREFSTOPIC%</nolink> topic of the current web, or in individual topics that use the plugin.  *Changing them here will have no effect!* This allows you to upgrade the plugin without having to worry about losing your settings.
 
 	* One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic:
-		* Set SHORTDESCRIPTION = Cache Foswiki macros in selected topics for faster page rendering
+		* Set VARCACHEPLUGIN_SHORTDESCRIPTION = Cache Foswiki macros in selected topics for faster page rendering
 
 	* Debug plugin: (See output in =data/debug.txt=)
-		* Set DEBUG = 0
+		* Set VARCACHEPLUGIN_DEBUG = 0
 
 	* Default refresh period in hours. No automatic refresh: =0=, default: =24=
-		* Set REFRESH = 24
+		* Set VARCACHEPLUGIN_REFRESH = 24
 
 	* Cache help messages. Use =$age= to indicate age of cache, =$link= to indicate the refresh URL
-		* Set CACHEMSG = This topic was cached $age ago ([<nop>[$link][refresh]])
-		* Set UPDATEMSG = This topic is now cached ([<nop>[$link][refresh]])
-		* #Set CACHEMSG = <a href="$link"><img src="%ATTACHURLPATH%/cachetopic.gif" alt="This topic was cached $age ago. Click icon to refresh." width="16" height="16" border="0" /></a>
-		* #Set UPDATEMSG = <a href="$link"><img src="%ATTACHURLPATH%/cachetopic.gif" alt="This topic is now cached. Click icon to refresh." width="16" height="16" border="0" /></a>
+		* Set VARCACHEPLUGIN_CACHEMSG = This topic was cached $age ago ([<nop>[$link][refresh]])
+		* Set VARCACHEPLUGIN_UPDATEMSG = This topic is now cached ([<nop>[$link][refresh]])
+		* #Set VARCACHEPLUGIN_CACHEMSG = <a href="$link"><img src="%ATTACHURLPATH%/cachetopic.gif" alt="This topic was cached $age ago. Click icon to refresh." width="16" height="16" border="0" /></a>
+		* #Set VARCACHEPLUGIN_UPDATEMSG = <a href="$link"><img src="%ATTACHURLPATH%/cachetopic.gif" alt="This topic is now cached. Click icon to refresh." width="16" height="16" border="0" /></a>
 
 
----++ Plugin Installation Instructions
+---++ Installation Instructions
 
-__Note:__ You do not need to install anything on the browser to use this plugin. The following instructions are for the administrator who installs the Plugin on the Foswiki server. 
-
-	* Download the ZIP file from the Plugin web (see below)
-	* Unzip ==%TOPIC%.zip== in your Foswiki installation directory. Content:
-	  | *File:* | *Description:* |
-	  | ==data/System/%TOPIC%.txt== | Plugin topic |
-	  | ==data/System/%TOPIC%.txt,v== | Plugin topic repository |
-	  | ==data/System/%TOPIC%Test.txt== | Plugin test topic |
-	  | ==data/System/%TOPIC%Test.txt,v== | Plugin test topic repository |
-	  | ==lib/Foswiki/Plugins/%TOPIC%.pm== | Plugin Perl module |
-	  | ==pub/System/%TOPIC%/cachetopic.gif== | Cache icon 16x16 |
-	* Run the [[%SCRIPTURL%/configure%SCRIPTSUFFIX%][configure%SCRIPTSUFFIX%]] script to enable the Plugin
-	* Test if the installation was successful:
-		* Visit the %TOPIC%Test topic, it contains a nested search
-		* Click on the <u>refresh</u> link or append a =?varcache=refresh= parameter to the URL
+%$INSTALL_INSTRUCTIONS%
 
 ---++ Plugin Info
 
 |  Plugin Author: | Original: TWiki:Main/PeterThoeny, In Foswiki context Foswiki:Main.KennethLavrsen |
 |  Copyright: | &copy; 2004-2007, TWIKI.NET, &copy; Foswiki Contributors |
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
-|  Plugin Version: | 29 Jan 2009 |
+|  Plugin Release: | %$RELEASE% |
+|  Plugin Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  05 May 2011: | Foswikitask:Item10712: No longer read preferences from plugin topic -- Foswiki:Main.AndrewJones |
 |  29 Jan 2009: | Foswiki version |
 |  06 Jan 2006: | Small fix for TWiki 4.0 |
 |  16 Jul 2004: | Doc improvements (no code change) |
 |  15 Jul 2004: | Initial version |
-|  Foswiki Dependency: | $Foswiki::Plugins::VERSION 1.024 (15 Jul 2004) |
-|  CPAN Dependencies: | none |
-|  Other Dependencies: | none |
-|  Perl Version: | 5.008 |
 |  Plugin Home: | http://foswiki.org/Extensions/%TOPIC% |
 |  Support: | http://foswiki.org/Support/%TOPIC% |
 

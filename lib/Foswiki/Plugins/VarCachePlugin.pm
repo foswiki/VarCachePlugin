@@ -1,7 +1,7 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, http://foswiki.org/
 #
 # Copyright (C) 2004-2006 Peter Thoeny, peter@thoeny.org
-# Copyright (C) 2009 Foswiki Contributors
+# Copyright (C) 2009-2011 Foswiki Contributors
 #
 # For licensing info read LICENSE file in the Foswiki root.
 # This program is free software; you can redistribute it and/or
@@ -22,8 +22,8 @@ package Foswiki::Plugins::VarCachePlugin;
 
 # =========================
 use vars qw(
-        $web $topic $user $installWeb $VERSION $RELEASE $pluginName
-        $debug $paramMsg
+        $VERSION $RELEASE $pluginName
+        $debug $paramMsg $NO_PREFS_IN_TOPIC
     );
 
 # This should always be $Rev$ so that Foswiki can determine the checked-in
@@ -34,14 +34,16 @@ $VERSION = '$Rev$';
 # This is a free-form string you can use to "name" your own plugin version.
 # It is *not* used by the build automation tools, but is reported as part
 # of the version number in PLUGINDESCRIPTIONS.
-$RELEASE = '29 Jan 2009';
+$RELEASE = '1.0';
 
 $pluginName = 'VarCachePlugin';  # Name of this Plugin
+
+$NO_PREFS_IN_TOPIC = 1;
 
 # =========================
 sub initPlugin
 {
-    ( $topic, $web, $user, $installWeb ) = @_;
+    my ( $topic, $web, $user, $installWeb ) = @_;
 
     # check for Plugins.pm versions
     if( $Foswiki::Plugins::VERSION < 1.024 ) {
