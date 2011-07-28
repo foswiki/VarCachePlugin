@@ -34,15 +34,18 @@ $VERSION = '$Rev$';
 # This is a free-form string you can use to "name" your own plugin version.
 # It is *not* used by the build automation tools, but is reported as part
 # of the version number in PLUGINDESCRIPTIONS.
-$RELEASE = '1.0';
+$RELEASE = '1.1';
 
 $pluginName = 'VarCachePlugin';    # Name of this Plugin
 
 $NO_PREFS_IN_TOPIC = 1;
 
+our $installWeb;
+
 # =========================
 sub initPlugin {
-    my ( $topic, $web, $user, $installWeb ) = @_;
+    my ( $topic, $web, $user, $iw ) = @_;
+    $installWeb = $iw;
 
     # Get plugin debug flag
     $debug = Foswiki::Func::getPreferencesFlag("VARCACHEPLUGIN_DEBUG");

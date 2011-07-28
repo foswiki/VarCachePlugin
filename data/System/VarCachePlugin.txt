@@ -59,11 +59,12 @@ Plugin settings are stored as preferences values. You can override the defaults 
 ---++ Plugin Info
 
 |  Plugin Author: | Original: TWiki:Main/PeterThoeny, In Foswiki context Foswiki:Main.KennethLavrsen |
-|  Copyright: | &copy; 2004-2007, TWIKI.NET, &copy; Foswiki Contributors |
+|  Copyright: | &copy; 2004-2007, TWIKI.NET, &copy; 2008-2011 Foswiki Contributors |
 |  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
 |  Plugin Release: | %$RELEASE% |
 |  Plugin Version: | %$VERSION% |
 |  Change History: | <!-- versions below in reverse order -->&nbsp; |
+|  1.1 (28 Jul 2011) | Minor bugfix -- Foswiki:Main.CrawfordCurrie |
 |  05 May 2011: | Foswikitask:Item10713: cache is now stored in the plugins work area, not under =pub=; Foswikitask:Item10712: No longer read preferences from plugin topic -- Foswiki:Main.AndrewJones |
 |  29 Jan 2009: | Foswiki version |
 |  06 Jan 2006: | Small fix for TWiki 4.0 |
